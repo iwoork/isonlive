@@ -30,7 +30,7 @@ const MainMenu = () => {
           {process.env.site_name}
         </Button>
         <Link href="/">
-          Watch
+          Live
         </Link>
         <Link href="/shop">
           Shop
@@ -40,7 +40,7 @@ const MainMenu = () => {
           {session && <>
             Signed in as {session.user.email}
             <Button href="/api/auth/signout">Sign out</Button>
-            <Button color="primary" variant="contained" href="/api/auth/signout">Schedule a live</Button>
+            <Button color="primary" variant="contained" href="/channels/create">Schedule a live</Button>
           </>}
         </Grid>
       </Toolbar>

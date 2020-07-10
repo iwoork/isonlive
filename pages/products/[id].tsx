@@ -1,17 +1,21 @@
 import { useRouter } from 'next/router'
+import ImageGallery from 'react-image-gallery'
+
 import { makeStyles } from '@material-ui/core/styles'
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
-import ImageIcon from '@material-ui/icons/Image';
-import { Typography } from '@material-ui/core'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
+import ListItemAvatar from '@material-ui/core/ListItemAvatar'
+import Avatar from '@material-ui/core/Avatar'
+import Typography from '@material-ui/core/Typography'
+
+import 'react-image-gallery/styles/css/image-gallery.css'
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Stream = () => {
+const Product = () => {
   const router = useRouter()
   const classes = useStyles()
   const { id } = router.query
@@ -58,11 +62,26 @@ const Stream = () => {
     }
   ]
 
+  const images = [
+    {
+      original: 'https://picsum.photos/id/1018/1000/600/',
+      thumbnail: 'https://picsum.photos/id/1018/250/150/',
+    },
+    {
+      original: 'https://picsum.photos/id/1015/1000/600/',
+      thumbnail: 'https://picsum.photos/id/1015/250/150/',
+    },
+    {
+      original: 'https://picsum.photos/id/1019/1000/600/',
+      thumbnail: 'https://picsum.photos/id/1019/250/150/',
+    },
+  ];
+
   return (
     <Container>
       <Grid container spacing={2}>
         <Grid item sm={8}>
-          <iframe width="100%" height="480" src="https://www.youtube.com/embed/UqFzfqlb60g?autoplay=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <ImageGallery items={images} />
         </Grid>
         <Grid item sm={4}>
           <Card className={classes.user}>
@@ -81,17 +100,15 @@ const Stream = () => {
               </Grid>
             </Grid>
           </Card>
-          <h3>Products</h3>
+          <h3>Product Reviews</h3>
           <List className={classes.products}>
             {products.map((product) => (
               <ListItem>
                 <ListItemAvatar>
-                  <Avatar>
-                    <ImageIcon />
-                  </Avatar>
+                  <Avatar alt="Travis Howard" src="/play-dummy.png" />
                 </ListItemAvatar>
-                <ListItemText primary={product.name} secondary={product.price.currency + '' + product.price.offer} />
-                <Button variant="contained" color="primary">Buy</Button>
+                <ListItemText primary="Efren Macasaet" secondary="25M subscribers" />
+                <Button variant="contained" color="primary">Watch</Button>
               </ListItem>
             ))}
           </List>
@@ -102,4 +119,4 @@ const Stream = () => {
 
 }
 
-export default Stream
+export default Product

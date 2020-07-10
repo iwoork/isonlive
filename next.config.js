@@ -1,5 +1,10 @@
-module.exports = {
+const withCSS = require('@zeit/next-css')
+
+module.exports = withCSS({
+  cssLoaderOptions: {
+    url: false
+  },
   env: {
-    site_name: 'isONlive'
+    site_name: 'Keioel'
   }
-}
+})
