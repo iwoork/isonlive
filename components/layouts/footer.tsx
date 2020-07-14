@@ -21,7 +21,7 @@ const Footer = () => {
   const classes = useStyles()
 
   return (
-    <Container align="center">
+    <Container>
       <Grid className={classes.footer} container>
         <Grid item>
           <Typography variant="body2" color="textSecondary" align="center">
