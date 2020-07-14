@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
 const MainMenu = () => {
   const router = useRouter()
   const classes = useStyles()
-  const [session, loading] = useSession()
+  const [session] = useSession()
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -66,7 +66,7 @@ const MainMenu = () => {
             <MenuItem onClick={() => go('/golive')}> Go live</MenuItem>
             <MenuItem onClick={() => go('/channels/create')}> Schedule a live</MenuItem>
             <MenuItem onClick={handleClose}>My account</MenuItem>
-            <MenuItem component={Link} to="/api/auth/signout">Logout</MenuItem>
+            <MenuItem onClick={() => go('/api/auth/signout')}>Logout</MenuItem>
           </Menu>
         </Grid>
       </Toolbar>
