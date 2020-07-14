@@ -19,8 +19,7 @@ const useStyles = makeStyles((theme) => ({
 const FilterCategory = () => {
   const classes = useStyles()
 
-  const handleChange = (e) => {
-    console.log(e)
+  const handleChange = () => {
   }
 
   return (
