@@ -7,6 +7,8 @@ import Button from '@material-ui/core/Button'
 import Toolbar from '@material-ui/core/Toolbar'
 import Grid from '@material-ui/core/Grid'
 import Link from '@material-ui/core/Link'
+import { Menu, MenuItem } from '@material-ui/core'
+import { useRouter } from 'next/router'
 
 const useStyles = makeStyles(theme => ({
   appbar: {
@@ -20,8 +22,22 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const MainMenu = () => {
+  const router = useRouter()
   const classes = useStyles()
   const [session, loading] = useSession()
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const go = (link) => {
+    router.push(link)
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <AppBar color="transparent" className={classes.appbar} position="static">
@@ -37,11 +53,21 @@ const MainMenu = () => {
         </Link>
         <Grid>
           {!session && <Button href="/api/auth/signin">Sign in</Button>}
-          {session && <>
-            Signed in as {session.user.email}
-            <Button href="/api/auth/signout">Sign out</Button>
-            <Button color="primary" variant="contained" href="/channels/create">Schedule a live</Button>
-          </>}
+          <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+            Menu
+          </Button>
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <MenuItem onClick={() => go('/golive')}> Go live</MenuItem>
+            <MenuItem onClick={() => go('/channels/create')}> Schedule a live</MenuItem>
+            <MenuItem onClick={handleClose}>My account</MenuItem>
+            <MenuItem component={Link} to="/api/auth/signout">Logout</MenuItem>
+          </Menu>
         </Grid>
       </Toolbar>
     </AppBar>
