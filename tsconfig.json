@@ -3,9 +3,13 @@
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "jsx": "preserve",
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
     "lib": [
       "dom",
-      "es2017"
+      "es2017",
+      "es6"
     ],
     "module": "esnext",
     "moduleResolution": "node",

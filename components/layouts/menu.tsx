@@ -21,23 +21,28 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+
 const MainMenu = () => {
   const router = useRouter()
   const classes = useStyles()
   const [session] = useSession()
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = React.useState<React.ReactNode>(null);
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget)
+  const handleClick = (event: KeyboardEvent) => {
+    if (event.currentTarget) {
+      setAnchorEl(event.currentTarget)
+    }
   };
 
-  const go = (link) => {
+  const go = (link: string) => {
     router.push(link)
   };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  console.log('e', anchorEl)
 
   return (
     <AppBar color="transparent" className={classes.appbar} position="static">
@@ -53,7 +58,7 @@ const MainMenu = () => {
         </Link>
         <Grid>
           {!session && <Button href="/api/auth/signin">Sign in</Button>}
-          <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+          <Button onClick={handleClick}>
             Menu
           </Button>
           <Menu

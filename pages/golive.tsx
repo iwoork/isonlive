@@ -1,18 +1,15 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid'
-import Container from '@material-ui/core/Container'
-
+import { FacebookProvider, Comments } from 'react-facebook'
 import Webcam from 'react-webcam'
-import { Box, Card, Button, FormControl, FormLabel, FormGroup, FormControlLabel, Checkbox, Typography } from '@material-ui/core'
+
+import { makeStyles } from '@material-ui/core/styles'
+import { Grid, Container, Divider, Box, Card, Button, FormControl, FormLabel, FormGroup, FormControlLabel, Checkbox, Typography } from '@material-ui/core'
 
 // Components
 import ProductLive from '../components/products/ProductLive'
-import ProductList from '../components/products/ProductList'
 import AccountPhone from '../components/accounts/AccountPhone'
 import AccountProfile from '../components/accounts/AccountProfile'
 import FilterPlatform from '../components/filters/FilterPlatform'
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,22 +38,25 @@ export default function Golive() {
     live: false,
     phone: true,
     profile: true,
+    youtube: false,
+    facebook: false
   })
   const products = [
     {
       name: 'Zara bag (brown)',
+      live: false,
       price: {
         actual: 100,
         offer: 80,
         currency: 'US$'
       },
       style: {
-        background: 'red',
-        color: '#fff'
+        border: '1px solid green'
       }
     },
     {
       name: 'Adidas belt',
+      live: false,
       price: {
         actual: 20,
         offer: 80,
@@ -65,6 +65,7 @@ export default function Golive() {
     },
     {
       name: 'Nike shoes',
+      live: false,
       price: {
         actual: 120,
         offer: 80,
@@ -81,6 +82,8 @@ export default function Golive() {
     }))
   }
 
+  const platformSelected = settings.facebook || settings.youtube
+
   return (
     <Container>
       <Grid container>
@@ -92,16 +95,17 @@ export default function Golive() {
                 <Webcam width={320} />
                 <Grid container justify="space-between">
                   <FilterPlatform />
-                  {settings.live ?
-                    <Button className={classes.button} onClick={handleChange} name="live" variant="contained">◾ Go offline</Button>
-                    :
-                    <Button className={classes.button} onClick={handleChange} variant="contained" name="live" color="primary">► Go live</Button>
+                  {
+                    settings.live ?
+                      <Button className={classes.button} onClick={handleChange} name="live" variant="contained">◾ Go offline</Button>
+                      :
+                      <Button className={classes.button} onClick={handleChange} variant="contained" name="live" color="primary">► Go live</Button>
                   }
                 </Grid>
                 <Grid container>
                   <Grid item sm={12}>
                     <Box className={classes.settings}>
-                      <FormControl component="fieldset" className={classes.formControl}>
+                      <FormControl component="fieldset">
                         <FormLabel component="legend">Settings</FormLabel>
                         <FormGroup>
                           <FormControlLabel
@@ -128,6 +132,7 @@ export default function Golive() {
                   {settings.phone &&
                     <AccountPhone number="+14372180111" />
                   }
+                  <Divider />
                   {
                     products &&
                     <ProductLive products={products} />
@@ -140,9 +145,10 @@ export default function Golive() {
         </Grid>
         <Grid item sm={6}>
           <Card className={classes.queue}>
-            <Typography variant="h6" component="h6">Products queue</Typography>
-            <Typography variant="body1" component="p">List of products you can show on your livestream. You can only show 3 products at any given time.</Typography>
-            <ProductList />
+            <Typography variant="h6" component="h6">Comments</Typography>
+            <FacebookProvider appId="896370114217872">
+              <Comments href="https://www.facebook.com/Reuters/videos/?ref=page_internal" />
+            </FacebookProvider>
           </Card>
         </Grid>
       </Grid>
