@@ -17,7 +17,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const AccountCard = () => {
+const AccountCard: React.FC<{ name: string }> = ({ name }) => {
   const classes = useStyles()
 
   return (

@@ -10,10 +10,7 @@ import Checkbox from '@material-ui/core/Checkbox'
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-  },
-  formControl: {
-    margin: theme.spacing(3),
-  },
+  }
 }));
 
 const FilterCategory = () => {
